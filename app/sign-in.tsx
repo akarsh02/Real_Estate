@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView, ScrollView,Image, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView,Image, TouchableOpacity, Alert, useWindowDimensions } from 'react-native'
 import React from 'react'
 import images from '@/constants/images'
 import icons from '@/constants/icons'
 import { login } from '@/lib/appwrite'
 
 const SignIn = () => {
+  const { width } = useWindowDimensions();
  const handleLogin =async() =>{
  const result = await login()
  if(result){
@@ -16,7 +17,15 @@ const SignIn = () => {
   return (
     <SafeAreaView className='bg-white h-full'>
      <ScrollView contentContainerClassName='h-full'>
-      <Image source ={images.onboarding} className="w-full h-4/6" resizeMode='contain'/>
+     <Image className={`mx-auto mt-4 w-${width*0.9} aspect-[3/4] h-2/3`}
+      source={images.onboarding}
+      style={{
+        width: width * 0.9, // 90% of the current window width
+        aspectRatio: 3 / 4, // Maintains a 3:4 aspect ratio
+        height:"auto"
+      }}
+      resizeMode="contain"
+    />
      <View className='justify-center items-center'>
       <Text className='text-black-200 font-rubik text-base'>WELCOME TO REAL SCOUT</Text>
       <Text className='text-black-300 font-rubik-bold text-center text-3xl mt-2'>Let's Get You Closer To

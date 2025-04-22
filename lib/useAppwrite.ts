@@ -1,5 +1,8 @@
+//custom react hook
 import { Alert } from "react-native";
 import { useEffect, useState, useCallback } from "react";
+
+// T and P which allws to not immediately  define the type of the props
 
 interface UseAppwriteOptions<T, P extends Record<string, string | number>> {
   fn: (params: P) => Promise<T>;
@@ -15,8 +18,8 @@ interface UseAppwriteReturn<T, P> {
 }
 
 export const useAppwrite = <T, P extends Record<string, string | number>>({
-  fn,
-  params = {} as P,
+  fn, //the asc fun to fetch data
+  params = {} as P, //default fetch paramaters empty obj
   skip = false,
 }: UseAppwriteOptions<T, P>): UseAppwriteReturn<T, P> => {
   const [data, setData] = useState<T | null>(null);

@@ -3,8 +3,12 @@ import React from 'react'
 import images from '@/constants/images'
 import icons from '@/constants/icons'
 import { login } from '@/lib/appwrite'
+import { useGlobalContext } from '@/lib/global-provider'
+import { Redirect } from 'expo-router'
 
 const SignIn = () => {
+  const {refetch,loading,isLoggedIn} = useGlobalContext()
+  if(!loading && isLoggedIn)  return <Redirect href={'/explore'}/>
   const { width } = useWindowDimensions();
  const handleLogin =async() =>{
  const result = await login()
